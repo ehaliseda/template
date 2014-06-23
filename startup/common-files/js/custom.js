@@ -3,7 +3,8 @@
 // 1. CODE INITS
 //     - parallax effect
 // 2.PLUG INS
-//     - click to show with css anim
+//     - click to show with css anim with sister binding
+//     - click to change background with if binding
 
 
 
@@ -22,9 +23,11 @@
 ////////// PLUG INS
 
 
-// Service Slider
+// Click to show with css anim with sister binding
 
-var serviceSlider =function(slidersElem,buttonsElem){
+// serviceSlider ('slider element' , 'buttons element');
+
+var serviceSlider = function(slidersElem,buttonsElem){
      // vars
     var sliders = $(slidersElem).hide();
     var slidersOrder = sliders.each(function(i){
@@ -35,12 +38,15 @@ var serviceSlider =function(slidersElem,buttonsElem){
     $(buttonsElem).on('click',function(){
         var currentBtn = $(this).index();
         var currentSlider = $(".slider"+currentBtn);
+
         // toggle the slider btns
         $(this)
             .fadeTo('slow' , 0.7)
             .siblings().css({'opacity' : '1'});
+
         // hide all sliders
         sliders.hide();
+
         // show slider and scroll to it
         currentSlider
             .show()
@@ -53,3 +59,27 @@ var serviceSlider =function(slidersElem,buttonsElem){
     }); // end .on
 
 }; // end serviceSlider
+
+
+
+// Click to change background with if binding
+
+var headerBkgd = function(){
+    var button = $('.pt-indicators li');
+    var btnOrder = button.each(function(i){
+                                    var i = i - 1;
+                                    $(this).addClass("headerBkgdBtn"+(i+1));
+                                });
+
+    $(button).on('click', function(){
+        if ($(this).hasClass('headerBkgdBtn0')) {
+            $('section.header-17-sub').css('background-color', '#0D8AD1');
+        } else if ($(this).hasClass('headerBkgdBtn1')) {
+            $('section.header-17-sub').css('background-color', '#d15b05');
+        } else if ($(this).hasClass('headerBkgdBtn2')) {
+            $('section.header-17-sub').css('background-color', '#00b877');
+        } 
+    }); // end .on click
+
+}; // end header background
+        
