@@ -82,4 +82,3 @@ var headerBkgd = function(){
     }); // end .on click
 
 }; // end header background
-        
