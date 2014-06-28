@@ -5,6 +5,7 @@
 // 2.PLUG INS
 //     - click to show with css anim with sister binding
 //     - click to change background with if binding
+//     - click to remove img img and add contact form
 
 
 
@@ -82,3 +83,35 @@ var headerBkgd = function(){
     }); // end .on click
 
 }; // end header background
+
+
+// Click to remove img img and add contact form
+
+
+(function() {
+    
+
+})(); // end
+
+var imgToForm = function(){
+    var imgbtn = $('section.content-25 button:eq(1)').hide();
+    var img = $('section.content-25 img');
+    var contactbtn = $('section.content-25 button:eq(0)');
+    var form = $('section.content-25 form').hide();    
+
+    contactbtn.on('click', function(){
+        img.fadeOut();
+        setTimeout(function(){form.fadeIn();}, 400);
+        contactbtn.fadeOut();
+        setTimeout(function(){imgbtn.fadeIn();}, 400);
+    });
+
+    imgbtn.on('click', function(){
+        form.fadeOut();
+        setTimeout(function(){img.fadeIn();}, 400);
+        imgbtn.fadeOut();
+        setTimeout(function(){contactbtn.fadeIn();}, 400);
+    });
+}; // end imgToForm
+
+
