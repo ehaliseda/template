@@ -5,7 +5,7 @@
 // 2.PLUG INS
 //     - click to show with css anim with sister binding
 //     - click to change background with if binding
-//     - click to remove img img and add contact form
+//     - click to remove img and add contact form
 //     - make banner height of window
 //     - edit things on mobiles
 //     - get IP adress location 
@@ -82,6 +82,7 @@ var headerBkgd = function(){
                                 });
 
     $(button).on('click', function(){
+
         if ($(this).hasClass('headerBkgdBtn0')) {
             $('section.header-17-sub').css('background-color', '#0D8AD1');
         } else if ($(this).hasClass('headerBkgdBtn1')) {
@@ -89,6 +90,7 @@ var headerBkgd = function(){
         } else if ($(this).hasClass('headerBkgdBtn2')) {
             $('section.header-17-sub').css('background-color', '#00b877');
         } 
+
     }); // end .on click
 
 }; // end header background
@@ -97,29 +99,8 @@ var headerBkgd = function(){
 ////////////////////////////////////////////////////////////////////////////////////
 
 
-// Click to remove img img and add contact form
-
-// var imgToForm = function(){
-//     var imgbtn = $('section.content-25 a:eq(1)').hide(),
-//           img = $('section.content-25 img'),
-//           contactbtn = $('section.content-25 a:eq(0)'),
-//           form = $('section.content-25 form').hide();    
-
-//     contactbtn.on('click', function(){
-//         img.fadeOut();
-//         setTimeout(function(){form.fadeIn();}, 400);
-//         contactbtn.fadeOut();
-//         setTimeout(function(){imgbtn.fadeIn();}, 400);
-//     });
-
-//     imgbtn.on('click', function(){
-//         form.fadeOut();
-//         setTimeout(function(){img.fadeIn();}, 400);
-//         imgbtn.fadeOut();
-//         setTimeout(function(){contactbtn.fadeIn();}, 400);
-//     });
-// }; // end imgToForm
-
+// Click to remove img and add contact form
+// imgToForm();
 
 var imgToForm = function(){
 
@@ -158,7 +139,7 @@ var fullBanner = function(element , offset , minHeight){
     } else {
         // do nothing
     }
-};
+}; // end fullBanner
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -188,21 +169,20 @@ var fullBanner = function(element , offset , minHeight){
 // Get IP adress location 
 // ipLocation();
 
-var ipLocation = function (){
-var english = '/Users/ehaliseda/Documents/Griffen/sites/vidalife/index.html';
+var ipLocation = function ( basic , nonbasic ) {
 
-    $.get("http://ipinfo.io", function(response) {
-                if (response.country == 'US') {
+    $.get("http://ipinfo.io", function( response ) {
+                if ( response.country == 'US' ) {
                     var pathname = window.location.pathname;
-                    // if you load pathaname then do nothing else go to link 'english'
-                    if (pathname == english) {
+                    // if you load pathaname then do nothing else go to link 'basic'
+                    if ( pathname == basic ) {
                         return
                     };
-                    window.location.replace(english);
+                    window.location.replace( basic );
                 } else {
-                    window.location.replace("mmafighting.com");
+                    window.location.replace( nonbasic );
                 }
-            }, "jsonp");
+            }, " jsonp ");
 }; // end ipLocation
 
 
@@ -228,8 +208,7 @@ var dates = function(open,close){
 
     }
 
-
-};
+}; // end dates
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -246,7 +225,7 @@ var smoothScroll = function(element){
         $('body').scrollTo(href,{duration:'slow', offsetTop : '50'});
         e.preventDefault();
     });
-};
+}; // end smoothScroll
 
 
 ////////////////////////////////////////////////////////////////////////////////////
