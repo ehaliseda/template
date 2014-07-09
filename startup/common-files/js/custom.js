@@ -6,6 +6,13 @@
 //     - click to show with css anim with sister binding
 //     - click to change background with if binding
 //     - click to remove img img and add contact form
+//     - make banner height of window
+//     - edit things on mobiles
+//     - get IP adress location 
+//     - get dates and show if they are open
+//     - scroll smoothly to div
+//     - animate icons when clicked
+
 
 
 
@@ -42,8 +49,8 @@ var serviceSlider = function(slidersElem,buttonsElem){
 
         // toggle the slider btns
         $(this)
-            .fadeTo('slow' , 0.7)
-            .siblings().css({'opacity' : '1'});
+            .addClass('service-button-active')
+            .siblings().removeClass('service-button-active');
 
         // hide all sliders
         sliders.hide();
@@ -61,6 +68,8 @@ var serviceSlider = function(slidersElem,buttonsElem){
 
 }; // end serviceSlider
 
+
+////////////////////////////////////////////////////////////////////////////////////
 
 
 // Click to change background with if binding
@@ -85,33 +94,169 @@ var headerBkgd = function(){
 }; // end header background
 
 
+////////////////////////////////////////////////////////////////////////////////////
+
+
 // Click to remove img img and add contact form
 
+// var imgToForm = function(){
+//     var imgbtn = $('section.content-25 a:eq(1)').hide(),
+//           img = $('section.content-25 img'),
+//           contactbtn = $('section.content-25 a:eq(0)'),
+//           form = $('section.content-25 form').hide();    
 
-(function() {
-    
+//     contactbtn.on('click', function(){
+//         img.fadeOut();
+//         setTimeout(function(){form.fadeIn();}, 400);
+//         contactbtn.fadeOut();
+//         setTimeout(function(){imgbtn.fadeIn();}, 400);
+//     });
 
-})(); // end
+//     imgbtn.on('click', function(){
+//         form.fadeOut();
+//         setTimeout(function(){img.fadeIn();}, 400);
+//         imgbtn.fadeOut();
+//         setTimeout(function(){contactbtn.fadeIn();}, 400);
+//     });
+// }; // end imgToForm
+
 
 var imgToForm = function(){
-    var imgbtn = $('section.content-25 button:eq(1)').hide();
-    var img = $('section.content-25 img');
-    var contactbtn = $('section.content-25 button:eq(0)');
-    var form = $('section.content-25 form').hide();    
 
-    contactbtn.on('click', function(){
-        img.fadeOut();
-        setTimeout(function(){form.fadeIn();}, 400);
-        contactbtn.fadeOut();
-        setTimeout(function(){imgbtn.fadeIn();}, 400);
+    var imgBtn = $('section.content-25 a:nth-child(odd)').hide(),
+          formBtn = $('section.content-25 a:nth-child(even)'),
+          form = $('section.content-25 form').hide();
+
+    formBtn.on('click', function(){
+        form.fadeIn();
+        formBtn.fadeOut(function(){
+            imgBtn.fadeIn();
+        });
     });
 
-    imgbtn.on('click', function(){
+    imgBtn.on('click', function(){
         form.fadeOut();
-        setTimeout(function(){img.fadeIn();}, 400);
-        imgbtn.fadeOut();
-        setTimeout(function(){contactbtn.fadeIn();}, 400);
+        imgBtn.fadeOut(function(){
+            formBtn.fadeIn();
+        });
     });
+   
+
 }; // end imgToForm
 
 
+////////////////////////////////////////////////////////////////////////////////////
+
+
+// Banner is height of window
+
+var fullBanner = function(element , offset , minHeight){
+    var height = $(window).height();
+
+    if (height > minHeight) {
+        $(element).css('height' , height - offset);
+    } else {
+        // do nothing
+    }
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+// Edit things on mobiles
+// mobile(); 
+//has class "mobile" and "notMobile"
+
+    var mobile = function (){
+
+        var mobile = $(document).find('.mobile'),
+              notMobile = $(document).find('.notMobile');
+
+        if ( isMobile.any() ) {
+            notMobile.hide();
+            mobile.show();
+        } else {
+            notMobile.show();
+            mobile.hide();
+        };
+    } // end mobile function
+    
+        
+////////////////////////////////////////////////////////////////////////////////////
+
+// Get IP adress location 
+// ipLocation();
+
+var ipLocation = function (){
+var english = '/Users/ehaliseda/Documents/Griffen/sites/vidalife/index.html';
+
+    $.get("http://ipinfo.io", function(response) {
+                if (response.country == 'US') {
+                    var pathname = window.location.pathname;
+                    // if you load pathaname then do nothing else go to link 'english'
+                    if (pathname == english) {
+                        return
+                    };
+                    window.location.replace(english);
+                } else {
+                    window.location.replace("mmafighting.com");
+                }
+            }, "jsonp");
+}; // end ipLocation
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Get Dates and show if they are open
+// dates();
+
+
+var dates = function(open,close){
+    var currentTime = new Date(),
+          hours = currentTime.getHours(),
+          minutes = currentTime.getMinutes();
+
+    // checks if time is between open and close
+    if ( hours > open && hours < close ) { // yes open
+
+        $('#date').text("We are open right now, give us a call.").addClass("open");
+
+    } else { // closed
+
+        $('#date').text("Sorry, we are closed. Leave us and e-mail and we will get back to you soon.").addClass("closed");
+
+    }
+
+
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Scroll smoothly to div
+// smoothScroll();
+// href needs to math the id of the div so it could work
+// http://lions-mark.com/jquery/scrollTo/
+
+var smoothScroll = function(element){
+    $(element).click(function(e){
+        var $this = $(this),
+              href = $this.attr('href');
+        $('body').scrollTo(href,{duration:'slow', offsetTop : '50'});
+        e.preventDefault();
+    });
+};
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// Animate icons when clicked
+// animLogo
+
+var animLogo = function(element){
+    $(element).click(function(e){
+        $(this).addClass('animation-target');
+        e.preventDefault();
+        })
+}; // end animLogo
